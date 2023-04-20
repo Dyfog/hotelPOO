@@ -14,6 +14,7 @@ class MainTest {
 
     @BeforeEach
     void setUp(){
+        habitaciones[0][6]=3;
         habitaciones[1][1]=2;
         habitaciones[2][1]=2;
 
@@ -33,6 +34,10 @@ class MainTest {
     }
     @Test
     void testestadoHotel(){
-        assertTrue();
+        assertTrue(Main.estadoHotel(habitaciones));
+    }
+    @Test
+    void testencontrarHbitacionDisponible(){
+        assertEquals(6,Main.encontrarProxHabitacionDisponible(habitaciones));
     }
 }
