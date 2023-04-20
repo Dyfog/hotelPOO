@@ -28,8 +28,6 @@ public class Main {
         }
         return true;
     }
-    public static void arranque(){
-    }
     public static void liberarHabitacion(int habitacion, int[][] habitaciones){
         habitaciones[0][habitacion] = 3;
     }
