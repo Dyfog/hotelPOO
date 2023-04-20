@@ -225,8 +225,6 @@ public class Main {
         }
         return habitacionDisponible;
     }
-
-
     public static void liberarHabitacion(int habitacion, int[][] habitaciones){
         habitaciones[0][habitacion] = 3;
     }
