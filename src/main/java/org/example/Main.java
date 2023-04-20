@@ -13,6 +13,10 @@ public class Main {
         Scanner in = new Scanner(System.in);
         opcionesMenu();
         int eleccion = ingresarSoloNumeroInt();
+        while (!validarRangoNumero(eleccion,1,5)) {
+            System.out.println("eleccion no valida, ingrese un numero entre 1 y 5");
+            eleccion = ingresarSoloNumeroInt();
+        }
         switch (eleccion) {
             case 1:
                 if (!estadoHotel(estadoHabitaciones)){
@@ -61,6 +65,10 @@ public class Main {
     public static void ingresarClienteMenu(int[][] estadoHabitaciones) {
         int eleccion = ingresarSoloNumeroInt();
         int cantNoches;
+        while (!validarRangoNumero(eleccion,1,5)) {
+            System.out.println("eleccion no valida, ingrese un numero entre 1 y 5");
+            eleccion = ingresarSoloNumeroInt();
+        }
         switch (eleccion) {
             case 1:
                 System.out.println("ha elegido alojarse sin comida");
@@ -132,12 +140,6 @@ public class Main {
         return estadoHabitaciones;
     }
 
-    public static boolean validarDistinto0(double numero) {
-        if (numero == 0) {
-            return false;
-        }
-        return true;
-    }
 
     public static boolean validarRangoNumero(int numero, int min, int max) {
         if (numero < min || numero > max) {
@@ -239,15 +241,19 @@ public class Main {
         return precio;
     }
 
-    public static void checkOut(int[][] habitaciones){
+    public static void checkOut(int[][] estadoHabitaciones){
         System.out.println("Ingrese el número de la habitación para el CheckOut");
         int habitacion = ingresarSoloNumeroInt();
         while (!validarRangoNumero(habitacion,0,9)){
             System.out.println("El número de habitación debe ir entre 0 y 9, ingrese su habitacion nuevamente");
             habitacion = ingresarSoloNumeroInt();
         }
-        int precio = calcularCosto(habitacion,habitaciones);
-        liberarHabitacion(habitacion,habitaciones);
+        if (estadoHabitaciones[0][habitacion]==3){
+            System.out.println("no se puede hacer checkOut a la habitación ya que esta disponible");
+            menu(estadoHabitaciones);
+        }
+        int precio = calcularCosto(habitacion,estadoHabitaciones);
+        liberarHabitacion(habitacion,estadoHabitaciones);
         System.out.println("El costo a pagar es de: " + precio);
     }
 
