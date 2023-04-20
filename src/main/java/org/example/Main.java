@@ -25,12 +25,16 @@ public class Main {
                 ingresarClienteOpciones();
                 ingresarClienteMenu(estadoHabitaciones);
             case 2:
-                
+
 
             case 3:
                 ingresarClienteMenu(estadoHabitaciones);
                 break;
+
             case 4:
+                mostrarEstadoHotel(estadoHabitaciones);
+                menu(estadoHabitaciones);
+            case 5:
                 System.out.println("salir");
                 System.exit(0);
             default:
@@ -43,7 +47,8 @@ public class Main {
         System.out.println("1.-ingresar un cliente a una haabitacion");
         System.out.println("2.-Hacer checkout de un cliente");
         System.out.println("3.-Reseat sistema por cambio de temporada");
-        System.out.println("4.-Salir");
+        System.out.println("4.-Mostrar estado de las habitaciones");
+        System.out.println("5.-Salir");
     }
 
     public static void ingresarClienteOpciones() {
@@ -60,34 +65,34 @@ public class Main {
         int cantNoches;
         switch (eleccion) {
             case 1:
-                    System.out.println("ha elegido alojarse sin comida");
-                    System.out.println("cuantas noches desea alojarse?");
-                    cantNoches = ingresarSoloNumeroInt();
-                    while (validarMayorA0(cantNoches)) {
-                        System.out.println("la cantidad de noches debe ser mayor a 0, ingrese nuevamente");
-                        cantNoches = ingresarSoloNumeroInt();
-                    }
-                    estadoHabitaciones = ingresarClienteSnComida(estadoHabitaciones, cantNoches);
-                    System.out.println("ingresado exitosamente");
-                    System.out.println("volviendo al menu");
-                    menu(estadoHabitaciones);
-            case 2:
-                System.out.println("ha elegido alojarse con comida");
-                    System.out.println("cuantas noches desea alojarse?");
-                    cantNoches = ingresarSoloNumeroInt();
-                while (validarMayorA0(cantNoches)) {
+                System.out.println("ha elegido alojarse sin comida");
+                System.out.println("cuantas noches desea alojarse?");
+                cantNoches = ingresarSoloNumeroInt();
+                while (!validarMayorA0(cantNoches)) {
                     System.out.println("la cantidad de noches debe ser mayor a 0, ingrese nuevamente");
                     cantNoches = ingresarSoloNumeroInt();
                 }
-                    estadoHabitaciones = ingresarClienteCnComida(estadoHabitaciones, cantNoches);
-                    System.out.println("ingresado exitosamente");
-                    System.out.println("volviendo al menu");
-                    menu(estadoHabitaciones);
+                estadoHabitaciones = ingresarClienteSnComida(estadoHabitaciones, cantNoches);
+                System.out.println("ingresado exitosamente");
+                System.out.println("volviendo al menu");
+                menu(estadoHabitaciones);
+            case 2:
+                System.out.println("ha elegido alojarse con comida");
+                System.out.println("cuantas noches desea alojarse?");
+                cantNoches = ingresarSoloNumeroInt();
+                while (!validarMayorA0(cantNoches)) {
+                    System.out.println("la cantidad de noches debe ser mayor a 0, ingrese nuevamente");
+                    cantNoches = ingresarSoloNumeroInt();
+                }
+                estadoHabitaciones = ingresarClienteCnComida(estadoHabitaciones, cantNoches);
+                System.out.println("ingresado exitosamente");
+                System.out.println("volviendo al menu");
+                menu(estadoHabitaciones);
             case 3:
                 System.out.println("Ha elegido reservar una habitacion sin comida");
                 System.out.println("cuantas noches desea alojarse?");
                 cantNoches = ingresarSoloNumeroInt();
-                while (validarMayorA0(cantNoches)) {
+                while (!validarMayorA0(cantNoches)) {
                     System.out.println("la cantidad de noches debe ser mayor a 0, ingrese nuevamente");
                     cantNoches = ingresarSoloNumeroInt();
                 }
@@ -99,7 +104,7 @@ public class Main {
                 System.out.println("Ha elegido reservar una habitacion con comida");
                 System.out.println("cuantas noches desea alojarse?");
                 cantNoches = ingresarSoloNumeroInt();
-                while (validarMayorA0(cantNoches)) {
+                while (!validarMayorA0(cantNoches)) {
                     System.out.println("la cantidad de noches debe ser mayor a 0, ingrese nuevamente");
                     cantNoches = ingresarSoloNumeroInt();
                 }
@@ -116,16 +121,16 @@ public class Main {
 
 
         }
-        //return solo para que la ide no de error
-        return null;
     }
 
     public static int[][] inicializarHabitaciones(int[][] estadoHabitaciones) {
         for (int cont = 0; cont < 10; cont++) {
-            for (int cont2 = 0; cont2 < 3; cont2++) {
-                estadoHabitaciones[cont][cont2] = 0;
+            estadoHabitaciones[0][cont] = 3;
+            for (int cont2 = 1; cont2 < 3; cont2++) {
+                estadoHabitaciones[cont2][cont] = 0;
             }
         }
+
         return estadoHabitaciones;
     }
 
