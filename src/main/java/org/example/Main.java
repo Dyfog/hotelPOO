@@ -12,13 +12,13 @@ public class Main {
         vaciarHotel(habitaciones);
     }
 
-    public static double ingresarSoloNumeroInt() {
+    public static int ingresarSoloNumeroInt() {
         Scanner in = new Scanner(System.in);
-        while (!in.hasNextDouble()) {
+        while (!in.hasNextInt()) {
             System.out.println("Entrada no válida. Ingrese un número: ");
             in.next();
         }
-        double numero = in.nextDouble();
+        int numero = in.nextInt();
         return numero;
     }
 
@@ -29,20 +29,31 @@ public class Main {
         return true;
     }
     public static void arranque(){
+    }
+    public static void liberarHabitacion(int habitacion, int[][] habitaciones){
+        habitaciones[0][habitacion] = 3;
+    }
+    public static int calcularCosto (int habitacion, int[][] habitaciones){
+        int precio = 0;
+        int cantNoches = habitaciones[2][habitacion];
+        if (habitaciones[1][habitacion]==1){
+            precio = cantNoches*30000;
+        } else {
+            precio = cantNoches*40000;
+        }
+        return precio;
+    }
 
-    }
-    public static void compararClave(){
-    }
-    public static void liberarHabitacion(){
-
-    }
-    public static void ingresarOcupado(){
-    }
-    public static void ingresarReserva(){
-
-    }
-    public static boolean sinComida(){
-        return true;
+    public static void checkOut(int[][] habitaciones){
+        System.out.println("Ingrese el número de la habitación para el CheckOut");
+        int habitacion = ingresarSoloNumeroInt();
+        while (!validarRangoNumero(habitacion,0,9)){
+            System.out.println("El número de habitación debe ir entre 0 y 9, ingrese su habitacion nuevamente");
+            habitacion = ingresarSoloNumeroInt();
+        }
+        int precio = calcularCosto(habitacion,habitaciones);
+        liberarHabitacion(habitacion,habitaciones);
+        System.out.println("El costo a pagar es de: " + precio);
     }
 
     public static void vaciarHotel(int[][] habitaciones){
@@ -51,10 +62,9 @@ public class Main {
         if (validarClave(clave)==true){
             for (int i = 0; i < 10 ; i++) {
                 habitaciones[0][i] = 3;
-                System.out.println(habitaciones[0][i]);
             }
         } else {
-                System.out.println("La clave ingresada no es válida");
+                System.out.println("La clave ingresada no es válida, se volverá al menú Principal");
                 menuPrincipal();
         }
     }
